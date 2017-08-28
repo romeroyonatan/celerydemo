@@ -2,7 +2,7 @@ import logging
 import time
 
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core import mail
 
 from celery import shared_task
 
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 def send_email(to, subject, txt, html):
     logger.info('Sending mail to: %r subject: %r', to, subject)
     time.sleep(5)
-    send_mail(
+    mail.send_mail(
         subject=subject,
         message=txt,
         recipient_list=(to,),

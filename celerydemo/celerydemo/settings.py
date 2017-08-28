@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery_email',
+    'demo',
 ]
 
 MIDDLEWARE = [
@@ -121,7 +123,8 @@ STATIC_URL = '/static/'
 
 
 # email settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+CELERY_EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
@@ -135,3 +138,9 @@ CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 CELERY_TASK_IGNORE_RESULT = True
 CELERY_TASK_SOFT_TIME_LIMIT = 60
 CELERY_TASK_TIME_LIMIT = 120
+
+
+CELERY_EMAIL_TASK_CONFIG = {
+    'queue': 'celery',
+    'rate_limit': '1/m',
+}
