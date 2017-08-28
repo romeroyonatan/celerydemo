@@ -141,6 +141,6 @@ CELERY_TASK_TIME_LIMIT = 120
 
 
 CELERY_EMAIL_TASK_CONFIG = {
-    'queue': 'celery',
+    'queue': 'email',
     'rate_limit': '1/m',
 }

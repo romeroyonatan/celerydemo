@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.views import generic
 
 
-from . import tasks, forms
+from . import forms
 
 
 class EmailSendConfirmView(generic.FormView):

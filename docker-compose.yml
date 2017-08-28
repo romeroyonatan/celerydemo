@@ -14,14 +14,14 @@ services:
     worker:
         build: .
         env_file: .env
-        command: celery -A celerydemo worker -l info
+        command: celery -A celerydemo worker -l info -Q celery,email
         depends_on:
           - redis
 
     flower:
         build: .
         env_file: .env
-        command: celery -A celerydemo flower
+        command: celery -A celerydemo flower -Q celery,email
         ports:
             - 5555:5555
         depends_on:
