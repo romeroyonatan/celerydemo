@@ -17,3 +17,21 @@ services:
         command: celery -A celerydemo worker -l info
         depends_on:
           - redis
+
+    flower:
+        build: .
+        env_file: .env
+        command: celery -A celerydemo flower
+        ports:
+            - 5555:5555
+        depends_on:
+            - redis
+
+    frontend:
+        build: frontend
+        ports:
+            - 80:80
+        env_file: .env
+        depends_on:
+          - backend
+          - flower
